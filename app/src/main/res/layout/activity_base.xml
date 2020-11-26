@@ -54,7 +54,7 @@
             android:layout_height="0dp">
 
             <LinearLayout
-                android:padding="10dp"
+                android:padding="12dp"
                 android:gravity="center"
                 android:id="@+id/rrr"
                 android:orientation="horizontal"
@@ -64,7 +64,7 @@
 
                 <TextView
                     android:textColor="#999999"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:text="选择楼栋"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>

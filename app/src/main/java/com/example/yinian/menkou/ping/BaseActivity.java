@@ -56,7 +56,7 @@ public class BaseActivity extends AppCompatActivity {
         super.onResume();
         SaveInfo saveInfo=MMKV.defaultMMKV().decodeParcelable("save",SaveInfo.class);
         if (saveInfo.getJigou().equals("")){
-            baseBinding.loudong.setEnabled(false);
+          //  baseBinding.loudong.setEnabled(false);
         }else {
             baseBinding.loudong.setEnabled(true);
         }
