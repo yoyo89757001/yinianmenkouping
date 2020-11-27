@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Looper;
 import android.widget.Toast;
 
-
+import com.example.yinian.menkou.ping.ui.InfoActivity;
 
 
 public class UnCeHandler implements Thread.UncaughtExceptionHandler {

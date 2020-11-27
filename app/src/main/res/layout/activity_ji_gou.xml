@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:background="#f5f5f9"
     android:layout_height="match_parent"
-    tools:context=".JiGouActivity">
+    tools:context=".ui.JiGouActivity">
 
     <RelativeLayout
         android:id="@+id/ddd"
-        android:background="#DD0CE5FA"
+        android:background="#dd59B683"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="50dp">

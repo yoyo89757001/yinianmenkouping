@@ -1,4 +1,4 @@
-package com.example.yinian.menkou.ping;
+package com.example.yinian.menkou.ping.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,6 +10,9 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.example.yinian.menkou.ping.DateUtils;
+import com.example.yinian.menkou.ping.R;
+import com.example.yinian.menkou.ping.beans.RenBean;
 import com.example.yinian.menkou.ping.databinding.ActivityInfoBinding;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
