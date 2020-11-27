@@ -48,7 +48,7 @@ public class BaseActivity extends AppCompatActivity {
             startActivity(new Intent(BaseActivity.this,InfoActivity.class));
             finish();
         }
-
+        startActivity(new Intent(BaseActivity.this,InfoActivity.class));
     }
 
     @Override
