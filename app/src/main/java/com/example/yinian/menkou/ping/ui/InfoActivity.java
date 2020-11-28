@@ -324,7 +324,6 @@ public class InfoActivity extends AppCompatActivity {
                                     RenBean renBean=new RenBean();
                                     renBean.setResult(renBeans);
                                     dangBeanList.add(renBean);
-                                    dangBeanList.add(renBean);
                                 }
                                 adapter.notifyDataSetChanged();
                             }
