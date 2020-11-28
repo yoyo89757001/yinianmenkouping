@@ -183,7 +183,7 @@ public class InfoActivity extends AppCompatActivity {
             }
             Glide.with(getApplicationContext())
                     .load(data.getResult().get(0).getElderImage())
-                    .error(R.drawable.hhjjkk)
+                    .error(R.drawable.jjkk)
                     .apply(RequestOptions.bitmapTransform(new RoundedCorners( 5)))
                     .into(holder.imageView);
             if (data.getResult().size()>1){
@@ -210,7 +210,7 @@ public class InfoActivity extends AppCompatActivity {
                 }
                 Glide.with(getApplicationContext())
                         .load(data.getResult().get(1).getElderImage())
-                        .error(R.drawable.hhjjkk)
+                        .error(R.drawable.jjkk)
                         .apply(RequestOptions.bitmapTransform(new RoundedCorners( 5)))
                         .into(holder.imageView1);
             }
