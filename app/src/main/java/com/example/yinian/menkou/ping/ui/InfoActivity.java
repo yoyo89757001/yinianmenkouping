@@ -355,5 +355,8 @@ public class InfoActivity extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed();
+    }
 }
