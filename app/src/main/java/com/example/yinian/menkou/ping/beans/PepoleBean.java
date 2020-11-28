@@ -2,10 +2,34 @@ package com.example.yinian.menkou.ping.beans;
 
 import java.util.List;
 
-public class RenBean {
+public class PepoleBean {
 
 
+    /**
+     * success : true
+     * result : [{"id":289,"elderName":"赵子龙","elderSex":1,"elderBlood":"","region":"","address":"蜀地","createTime":1594259644000,"updateTime":1594785295000,"contractNumber":"00001","censusRegister":"非户籍","idCard":"0210000251541","bloodType":"RH","nationId":"哈萨克族","political":"团员","birthday":1120320000000,"telPhone":"1888888888","economySource":"城市低保","religiousBelief":"佛教","homeTel":"020455555","mediaChannels":"互联网","businessType":"农民","medicalInsurance":"城镇居民医疗保险","degreeEducation":2,"maritalStatus":1,"elderType":1,"formSupply":2,"retirementUnit":"康亦健","paymentMethod":2,"refereeName":"关羽","refereePay":2000,"allergicDrug":"","checkInTime":1594742400000,"inStatus":0,"nurseLevelId":4,"nurseLevelName":"介护1级","nurseGroupName":"","buildId":4,"buildName":"颐和","floorId":15,"floorName":"2F","roomId":8,"roomName":"201","bedId":22,"bedName":"02","orgId":2,"inDeposit":12000,"doctorId":13,"doctorName":"周云"},{"id":290,"elderName":"cesd","elderSex":1,"elderAge":6,"elderBlood":"","region":"","address":"","createTime":1594785342000,"updateTime":1594785444000,"contractNumber":"123123","censusRegister":"户籍","idCard":"124234234524","bloodType":"A","nationId":"汉族","political":"群众","telPhone":"14543434343","economySource":"养老保险","religiousBelief":"","homeTel":"","mediaChannels":"","businessType":"","medicalInsurance":"","retirementUnit":"","refereeName":"","allergicDrug":"","checkInTime":1594742400000,"inStatus":1,"nurseLevelId":5,"nurseLevelName":"介护Ⅱ级","nurseGroupName":"","buildId":4,"buildName":"颐和","floorId":15,"floorName":"2F","roomId":8,"roomName":"201","bedId":22,"bedName":"02","orgId":2,"inDeposit":13666,"doctorId":14,"doctorName":"宋坤华"}]
+     * code : 1
+     */
+
+    private boolean success;
+    private int code;
     private List<ResultDTO> result;
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
 
     public List<ResultDTO> getResult() {
         return result;
@@ -519,6 +543,4 @@ public class RenBean {
             this.elderAge = elderAge;
         }
     }
-
-
 }

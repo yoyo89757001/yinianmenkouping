@@ -30,7 +30,7 @@ public class BaseActivity extends AppCompatActivity implements EasyPermissions.P
     final static int COUNTS = 6;// 点击次数
     final static long DURATION = 1000;// 规定有效时间
     long[] mHits = new long[COUNTS];
-    private SaveInfo saveInfo=null;
+
 
 
     @Override
@@ -109,7 +109,8 @@ public class BaseActivity extends AppCompatActivity implements EasyPermissions.P
 
             SaveInfo saveInfo=MMKV.defaultMMKV().decodeParcelable("save",SaveInfo.class);
             if (!saveInfo.getJigou().equals("") && !saveInfo.getLoudong().equals("") && !saveInfo.getLouceng().equals("") && !saveInfo.getFangjian().equals("")){
-                startActivity(new Intent(BaseActivity.this, InfoActivity.class));//跳转主界面
+                SaveInfo saveInfoss= MMKV.defaultMMKV().decodeParcelable("save",SaveInfo.class);
+                startActivity(new Intent(BaseActivity.this, InfoActivity.class).putExtra("roomId",saveInfoss.getFangjianId()));//跳转主界面
                 finish();
             }
 

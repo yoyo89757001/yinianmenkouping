@@ -868,4 +868,39 @@ public class DateUtils {
     }
 
     }
+
+
+    /**
+     * 拆分集合
+     * @param datas
+     * @param splitSize
+     * @param <T>
+     * @return
+     */
+    public static  <T> List<List<T>> spliceArrays(List<T> datas, int splitSize) {
+        if (datas == null || splitSize < 1) {
+            return  null;
+        }
+        int totalSize = datas.size();
+        //获取要拆分子数组个数
+        int count = (totalSize % splitSize == 0) ?
+                (totalSize / splitSize) : (totalSize/splitSize+1);
+
+        System.out.println("split count = " +count);
+
+        List<List<T>> rows = new ArrayList();
+        for (int i = 0;i < count;i ++) {
+
+            int index = i * splitSize;
+            List<T> cols = new ArrayList();
+            int j = 0;
+            while (j < splitSize && index < totalSize) {
+                cols.add(datas.get(index++));
+                j ++;
+            }
+            rows.add(cols);
+        }
+        return rows;
     }
+
+}

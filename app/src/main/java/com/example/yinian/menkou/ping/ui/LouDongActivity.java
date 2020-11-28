@@ -2,6 +2,7 @@ package com.example.yinian.menkou.ping.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -77,6 +78,19 @@ public class LouDongActivity extends AppCompatActivity {
                 showSelete();
             }
         });
+        binding.queding.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!binding.t2.getText().toString().equals("选择楼层")){
+                    SaveInfo saveInfo= MMKV.defaultMMKV().decodeParcelable("save",SaveInfo.class);
+                    if (!saveInfo.getFangjianId().equals("")){
+                        startActivity(new Intent(LouDongActivity.this,InfoActivity.class).putExtra("roomId",saveInfo.getFangjianId()));
+                        EventBus.getDefault().post("finish");
+                    }
+                }
+
+            }
+        });
 
         loginloudong(saveInfo.getJigouId());
 
@@ -84,6 +98,10 @@ public class LouDongActivity extends AppCompatActivity {
 
 
     private void showSelete(){
+        if (options1Items.size()==0){
+            Toast.makeText(LouDongActivity.this, "没有楼栋数据", Toast.LENGTH_LONG).show();
+            return;
+        }
         /**
          * 注意 ：如果是三级联动的数据(省市区等)，请参照 JsonDataActivity 类里面的写法。
          */
@@ -94,7 +112,14 @@ public class LouDongActivity extends AppCompatActivity {
                 //返回的分别是三个级别的选中位置
                 binding.t1.setText(options1Items.get(options1).getPickerViewText());
                 binding.t2.setText(options2Items.get(options1).get(options2).getPickerViewText()+"-"+options3Items.get(options1).get(options2).get(options3).getPickerViewText());
-
+                SaveInfo saveInfo= MMKV.defaultMMKV().decodeParcelable("save",SaveInfo.class);
+                saveInfo.setLoudong(options1Items.get(options1).getPickerViewText());
+                saveInfo.setLoudongId(options1Items.get(options1).getId());
+                saveInfo.setLouceng(options2Items.get(options1).get(options2).getPickerViewText());
+                saveInfo.setLoucengId(options2Items.get(options1).get(options2).getId());
+                saveInfo.setFangjian(options3Items.get(options1).get(options2).get(options3).getPickerViewText());
+                saveInfo.setFangjianId(options3Items.get(options1).get(options2).get(options3).getId());
+                MMKV.defaultMMKV().encode("save",saveInfo);
                   //      + options2Items.get(options1).get(options2)
                         /* + options3Items.get(options1).get(options2).get(options3).getPickerViewText()*/;
 
@@ -122,6 +147,8 @@ public class LouDongActivity extends AppCompatActivity {
         pvOptions.setPicker(options1Items, options2Items,options3Items);//三级选择器*/
         pvOptions.show();
     }
+
+
 
 
 

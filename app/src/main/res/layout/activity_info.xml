@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:id="@+id/root_layout"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="#f5f5f9"
@@ -18,41 +19,52 @@
             android:layout_centerVertical="true"
             android:layout_height="match_parent">
 
-            <TextView
-                android:textSize="20sp"
-                android:textColor="@color/white"
-                android:text="颐和"
-                app:layout_constraintLeft_toLeftOf="parent"
+            <LinearLayout
+                android:orientation="horizontal"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:id="@+id/loudong"
-                android:layout_marginLeft="16dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:text="颐和"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:id="@+id/loudong"
+                    android:layout_marginLeft="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
-            <TextView
-                android:textSize="32sp"
-                android:textColor="@color/white"
-                android:text="201"
-                android:id="@+id/fangjian"
-                app:layout_constraintTop_toTopOf="@+id/loudong"
-                app:layout_constraintBottom_toBottomOf="@+id/loudong"
-                app:layout_constraintLeft_toRightOf="@+id/loudong"
-                android:layout_marginLeft="2dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                <TextView
+                    android:textSize="40sp"
+                    android:textColor="@color/white"
+                    android:text="201"
+                    android:id="@+id/fangjian"
+                    app:layout_constraintTop_toTopOf="@+id/loudong"
+                    app:layout_constraintBottom_toBottomOf="@+id/loudong"
+                    app:layout_constraintLeft_toRightOf="@+id/loudong"
+                    android:layout_marginLeft="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
-            <TextView
-                android:textSize="16sp"
-                android:textColor="@color/white"
-                android:text="房"
-                app:layout_constraintBottom_toBottomOf="@+id/loudong"
-                app:layout_constraintLeft_toRightOf="@+id/fangjian"
-                android:id="@+id/ffff"
-                android:layout_marginLeft="2dp"
-                android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                <TextView
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    android:text="房"
+                    app:layout_constraintBottom_toBottomOf="@+id/loudong"
+                    app:layout_constraintLeft_toRightOf="@+id/fangjian"
+                    android:id="@+id/ffff"
+                    android:layout_marginLeft="2dp"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -83,11 +95,45 @@
 
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <LinearLayout
+        android:id="@+id/shuju"
         android:layout_weight="5"
-        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="0dp"/>
+        android:gravity="center"
+        android:background="@color/white"
+        android:layout_height="0dp">
+
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/kong_null"
+                android:layout_width="150dp"
+                android:layout_height="95dp"/>
+
+            <TextView
+                android:textColor="#FFD7D7D7"
+                android:textSize="16sp"
+                android:text="暂无数据"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+        <com.youth.banner.Banner
+            android:id="@+id/banner"
+            android:visibility="gone"
+            android:layout_weight="5"
+            app:banner_loop_time="6000"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -126,18 +172,20 @@
 
         <com.qmuiteam.qmui.widget.QMUIFontFitTextView
             android:textColor="#333333"
-            android:textSize="30sp"
+            android:textSize="28sp"
             android:layout_marginLeft="16dp"
+            android:id="@+id/gggh"
             android:layout_marginRight="16dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:text="广州颐年养老"
+            android:gravity="center"
             app:layout_constraintRight_toLeftOf="@+id/gggg"
-            app:qmui_maxTextSize="30sp"
+            app:qmui_maxTextSize="28sp"
             app:qmui_minTextSize="10sp"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="0dp"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
