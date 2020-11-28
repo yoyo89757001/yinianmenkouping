@@ -183,8 +183,8 @@ public class InfoActivity extends AppCompatActivity {
             }
             Glide.with(getApplicationContext())
                     .load(data.getResult().get(0).getElderImage())
-                    .error(R.drawable.jjkk)
-                    .apply(RequestOptions.bitmapTransform(new RoundedCorners( 5)))
+                    .error(R.drawable.ooppp)
+                    .apply(RequestOptions.bitmapTransform(new RoundedCorners( 6)))
                     .into(holder.imageView);
             if (data.getResult().size()>1){
                 holder.age1.setText(data.getResult().get(1).getElderAge()+"岁 "+(data.getResult().get(1).getElderSex()==1?"男":"女"));
@@ -210,8 +210,8 @@ public class InfoActivity extends AppCompatActivity {
                 }
                 Glide.with(getApplicationContext())
                         .load(data.getResult().get(1).getElderImage())
-                        .error(R.drawable.jjkk)
-                        .apply(RequestOptions.bitmapTransform(new RoundedCorners( 5)))
+                        .error(R.drawable.ooppp)
+                        .apply(RequestOptions.bitmapTransform(new RoundedCorners( 6)))
                         .into(holder.imageView1);
             }
 
