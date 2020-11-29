@@ -156,13 +156,13 @@
             <ImageView
                 android:id="@+id/erweima"
                 android:scaleType="fitXY"
-                android:layout_width="80dp"
-                android:layout_height="80dp"/>
+                android:layout_width="60dp"
+                android:layout_height="60dp"/>
             <TextView
-                android:textSize="18sp"
-                android:layout_marginTop="4dp"
+                android:textSize="10sp"
                 android:textColor="#333333"
-                android:text="专属码"
+                android:text="房间专属码"
+                android:id="@+id/zhuanshu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -171,8 +171,8 @@
 
 
         <com.qmuiteam.qmui.widget.QMUIFontFitTextView
-            android:textColor="#333333"
-            android:textSize="28sp"
+            android:textColor="#dd59B683"
+            android:textSize="26sp"
             android:layout_marginLeft="16dp"
             android:id="@+id/gggh"
             android:layout_marginRight="16dp"
@@ -182,8 +182,8 @@
             android:text="广州颐年养老"
             android:gravity="center"
             app:layout_constraintRight_toLeftOf="@+id/gggg"
-            app:qmui_maxTextSize="28sp"
-            app:qmui_minTextSize="10sp"
+            app:qmui_maxTextSize="26sp"
+            app:qmui_minTextSize="8sp"
             android:layout_width="0dp"
             android:layout_height="0dp"/>
 

@@ -102,8 +102,14 @@ public class InfoActivity extends AppCompatActivity {
 
         adapter=new ImageAdapter(dangBeanList);
         binding.banner.setAdapter(adapter);
+        binding.shijian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginloudong(id);
+            }
+        });
 
-       loginloudong(id);
+        loginloudong(id);
 
     }
 
@@ -324,6 +330,7 @@ public class InfoActivity extends AppCompatActivity {
                                     RenBean renBean=new RenBean();
                                     renBean.setResult(renBeans);
                                     dangBeanList.add(renBean);
+
                                 }
                                 adapter.notifyDataSetChanged();
                             }
@@ -352,6 +359,12 @@ public class InfoActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        binding.zhuanshu.setText(saveInfo.getFangjian()+"房间专属码");
+        super.onResume();
     }
 
     @Override
