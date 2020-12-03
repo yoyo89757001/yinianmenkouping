@@ -6,7 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +54,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -68,7 +73,7 @@ public class InfoActivity extends AppCompatActivity {
     long[] mHits = new long[COUNTS];
     private SaveInfo saveInfo=null;
     private ImageAdapter adapter=null;
-
+    private TimeChangeReceiver timeChangeReceiver;
 
 
     @Override
@@ -83,8 +88,9 @@ public class InfoActivity extends AppCompatActivity {
         binding.gggh.setText(saveInfo.getJigou());
         binding.loudong.setText(saveInfo.getLoudong());
         binding.fangjian.setText(saveInfo.getFangjian());
-        zxing("sdfsdfsdfdsfsddfsdfjghjghjtertertertretretertertgdf");
-
+        if (saveInfo.getQrCodeData()!=null)
+        zxing(saveInfo.getQrCodeData());
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         binding.fangjian.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +114,15 @@ public class InfoActivity extends AppCompatActivity {
                 loginloudong(id);
             }
         });
+
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Intent.ACTION_TIME_TICK);//每分钟变化
+        intentFilter.addAction(Intent.ACTION_TIMEZONE_CHANGED);//设置了系统时区
+        intentFilter.addAction(Intent.ACTION_TIME_CHANGED);//设置了系统时间
+        timeChangeReceiver = new TimeChangeReceiver();
+        registerReceiver(timeChangeReceiver, intentFilter);
+
 
         loginloudong(id);
 
@@ -310,8 +325,10 @@ public class InfoActivity extends AppCompatActivity {
                                 binding.banner.setVisibility(View.VISIBLE);
                                 binding.shuju.setVisibility(View.GONE);
                               List<List<PepoleBean.ResultDTO>> dddd=  DateUtils.spliceArrays(healthBean.getResult(),2);
+                                dangBeanList.clear();
                                 for (List<PepoleBean.ResultDTO> resultDTOS : dddd) {
                                     List<RenBean.ResultDTO> renBeans=new ArrayList<>();
+                                    int i=0;
                                     for (PepoleBean.ResultDTO resultDTO : resultDTOS) {
                                         Log.d("InfoActivity", "resultDTO:" + resultDTO.getElderName());
                                         RenBean.ResultDTO bean=new RenBean.ResultDTO();
@@ -323,7 +340,14 @@ public class InfoActivity extends AppCompatActivity {
                                         bean.setCreateTime(resultDTO.getCreateTime());
                                         bean.setCheckInTime(resultDTO.getCheckInTime());
                                         bean.setNurseLevelName(resultDTO.getNurseLevelName());
-                                        bean.setElderImage(resultDTO.getElderImage());
+                                        //bean.setElderImage(resultDTO.getElderImage());
+                                        if (i==0){
+                                            bean.setElderImage("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606647944241&di=079f8e332e60013b7509da6a427c3780&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn%2Fw640h914%2F20180211%2Fbb18-fyrkuxt4639327.jpg");
+                                        }
+                                        if (i==1){
+                                            bean.setElderImage("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606647944238&di=901448a231f4b0a00430e1db88110156&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Ftranslate%2Fw391h561%2F20180226%2F6C1P-fyrwsqi2966178.jpg");
+                                        }
+                                        i++;
                                         bean.setId(resultDTO.getId());
                                         renBeans.add(bean);
                                     }
@@ -359,6 +383,44 @@ public class InfoActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+    class TimeChangeReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            switch (Objects.requireNonNull(intent.getAction())) {
+                case Intent.ACTION_TIME_TICK:
+                    binding.riqi.setText(DateUtils.time1(System.currentTimeMillis()+""));
+                    binding.shijian.setText(DateUtils.ti(System.currentTimeMillis()+""));
+//                    if (xiaoshiss.split(":")[0].equals("03") && xiaoshiss.split(":")[1].equals("15")) {
+//                        Log.d("TimeChangeReceiver", "ssss");
+//                        DengUT.reboot();
+//                    }
+//                    //1分钟一次指令获取
+//                    if (baoCunBean.getHoutaiDiZhi() != null && !baoCunBean.getHoutaiDiZhi().equals("") && paAccessControl!=null) {
+//                        if (isGET){
+//                            isGET=false;
+//                            link_get_zhiling();
+//                        }
+//                    }
+                    break;
+                case Intent.ACTION_TIME_CHANGED:
+                    //设置了系统时间
+                    // Toast.makeText(context, "system time changed", Toast.LENGTH_SHORT).show();
+                    break;
+                case Intent.ACTION_TIMEZONE_CHANGED:
+                    //设置了系统时区的action
+                    //  Toast.makeText(context, "system time zone changed", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(timeChangeReceiver);
+        super.onDestroy();
     }
 
     @Override

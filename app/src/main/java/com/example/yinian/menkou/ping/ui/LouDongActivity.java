@@ -49,7 +49,7 @@ public class LouDongActivity extends AppCompatActivity {
     private SaveInfo saveInfo=null;
     private MediaType JSONTYPE  = MediaType.parse("application/json");
     private QMUITipDialog qmuiTipDialog = null;
-    private List<LouDongBean.ResultDTO> louDongBeanA =new ArrayList<>();
+
     private OptionsPickerView pvOptions=null;
 
 
@@ -119,6 +119,7 @@ public class LouDongActivity extends AppCompatActivity {
                 saveInfo.setLoucengId(options2Items.get(options1).get(options2).getId());
                 saveInfo.setFangjian(options3Items.get(options1).get(options2).get(options3).getPickerViewText());
                 saveInfo.setFangjianId(options3Items.get(options1).get(options2).get(options3).getId());
+                saveInfo.setQrCodeData(options3Items.get(options1).get(options2).get(options3).getQrCodeData());
                 MMKV.defaultMMKV().encode("save",saveInfo);
                   //      + options2Items.get(options1).get(options2)
                         /* + options3Items.get(options1).get(options2).get(options3).getPickerViewText()*/;
@@ -128,7 +129,7 @@ public class LouDongActivity extends AppCompatActivity {
                 .setTitleText("")
                 .setContentTextSize(20)//设置滚轮文字大小
                 .setDividerColor(Color.LTGRAY)//设置分割线的颜色
-                .setSelectOptions(0, 1)//默认选中项
+                .setSelectOptions(0)//默认选中项
                 .setBgColor(Color.parseColor("#ffffff"))
                 .setTitleBgColor(Color.parseColor("#dd59B683"))
                 .setTitleColor(Color.parseColor("#333333"))
@@ -185,34 +186,50 @@ public class LouDongActivity extends AppCompatActivity {
                     Logger.d("查询机构楼栋:" + call.request().url()+stA);
                     LouDongBean healthBean = JSON.parseObject(stA, LouDongBean.class);
                     if (healthBean!=null && healthBean.isSuccess() && healthBean.getResult()!=null && healthBean.getResult().size()>0){
-                        louDongBeanA.addAll(healthBean.getResult());
-                        for (LouDongBean.ResultDTO resultDTO : louDongBeanA) {
+
+                        for (LouDongBean.ResultDTO resultDTO : healthBean.getResult()) {
                           //  Log.d("LouDongActivity", resultDTO.getBuildName());
                           //  Log.d("LouDongActivity", "resultDTO.getId():" + resultDTO.getId());
                             BiudBean biudBean=new BiudBean(resultDTO.getId()+"",resultDTO.getBuildName());
                             options1Items.add(biudBean);
                             ArrayList<BiudBean> options2 = new ArrayList<>();
                             ArrayList<ArrayList<BiudBean>> options2_2 = new ArrayList<>();
-                            for (LouDongBean.ResultDTO.FloorsDTO floor : resultDTO.getFloors()) {
-                                BiudBean biudBean2=new BiudBean(floor.getId()+"",floor.getFloorName());
-                                options2.add(biudBean2);
-                              //  Log.d("LouDongActivity", "floor.getId():" + floor.getId());
-                               // Log.d("LouDongActivity", floor.getFloorName());
-                                ArrayList<BiudBean> options3 = new ArrayList<>();
-                                if (floor.getRoomList()==null || floor.getRoomList().size()==0){
-                                   // Log.d("LouDongActivity", "加空");
-                                    BiudBean biudBean3=new BiudBean("","");
-                                    options3.add(biudBean3);
-                                }else {
-                                    for (LouDongBean.ResultDTO.FloorsDTO.RoomListDTO roomListDTO : floor.getRoomList()) {
-                                       // Log.d("LouDongActivity", "roomListDTO.getId():" + roomListDTO.getId());
-                                       // Log.d("LouDongActivity", roomListDTO.getRoomName());
-                                        BiudBean biudBean3=new BiudBean(roomListDTO.getId()+"",roomListDTO.getRoomName());
+                            if (resultDTO.getFloors()!=null && resultDTO.getFloors().size()>0){
+                                for (LouDongBean.ResultDTO.FloorsDTO floor : resultDTO.getFloors()) {
+                                    BiudBean biudBean2=new BiudBean(floor.getId()+"",floor.getFloorName());
+                                    options2.add(biudBean2);
+                                    //  Log.d("LouDongActivity", "floor.getId():" + floor.getId());
+                                    // Log.d("LouDongActivity", floor.getFloorName());
+                                    ArrayList<BiudBean> options3 = new ArrayList<>();
+
+                                    if (floor.getRoomList()!=null && floor.getRoomList().size()>0){
+                                        for (LouDongBean.ResultDTO.FloorsDTO.RoomListDTO roomListDTO : floor.getRoomList()) {
+                                            // Log.d("LouDongActivity", "roomListDTO.getId():" + roomListDTO.getId());
+                                            // Log.d("LouDongActivity", roomListDTO.getRoomName());
+                                            BiudBean biudBean3=new BiudBean(roomListDTO.getId()+"",roomListDTO.getRoomName());
+                                            biudBean3.setQrCodeData(roomListDTO.getQrCodeData());
+                                            options3.add(biudBean3);
+                                        }
+                                    }else {
+                                        BiudBean biudBean3=new BiudBean("","");
+                                        biudBean3.setQrCodeData("");
                                         options3.add(biudBean3);
                                     }
+                                    options2_2.add(options3);
+                                    options3Items.add(options2_2);
                                 }
+                            }else {
+                                ArrayList<BiudBean> options3 = new ArrayList<>();
+                                BiudBean biudBean3=new BiudBean("","");
+                                biudBean3.setQrCodeData("");
+                                options3.add(biudBean3);
                                 options2_2.add(options3);
                                 options3Items.add(options2_2);
+
+                                BiudBean biudBean2=new BiudBean("","");
+                                options2.add(biudBean2);
+
+
                             }
                             options2Items.add(options2);
                         }

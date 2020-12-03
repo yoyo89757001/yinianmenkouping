@@ -217,6 +217,15 @@ public class LouDongBean {
                 private int floorId;
                 private int orgId;
                 private int bedNum;
+                private String qrCodeData;
+
+                public String getQrCodeData() {
+                    return qrCodeData;
+                }
+
+                public void setQrCodeData(String qrCodeData) {
+                    this.qrCodeData = qrCodeData;
+                }
 
                 public int getId() {
                     return id;

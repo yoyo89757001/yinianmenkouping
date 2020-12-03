@@ -32,7 +32,7 @@ public class MyApplication extends Application {
 
     ArrayList<Activity> list = new ArrayList<Activity>();
     public static MyApplication myApplication;
-    public static final String URL ="http://172.17.8.32:8082";
+    public static final String URL ="http://39.108.253.88:8082";
 
 
     public static String SDPATH1 = null;

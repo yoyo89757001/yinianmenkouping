@@ -13,6 +13,10 @@ public class SaveInfo implements Parcelable {
     private String loucengId;
     private String fangjian;
     private String fangjianId;
+    private String qrCodeData;
+
+    public SaveInfo() {
+    }
 
     protected SaveInfo(Parcel in) {
         jigou = in.readString();
@@ -23,6 +27,7 @@ public class SaveInfo implements Parcelable {
         loucengId = in.readString();
         fangjian = in.readString();
         fangjianId = in.readString();
+        qrCodeData = in.readString();
     }
 
     public static final Creator<SaveInfo> CREATOR = new Creator<SaveInfo>() {
@@ -37,44 +42,20 @@ public class SaveInfo implements Parcelable {
         }
     };
 
-    public String getJigouId() {
-        return jigouId;
-    }
-
-    public void setJigouId(String jigouId) {
-        this.jigouId = jigouId;
-    }
-
-    public String getLoudongId() {
-        return loudongId;
-    }
-
-    public void setLoudongId(String loudongId) {
-        this.loudongId = loudongId;
-    }
-
-    public String getLoucengId() {
-        return loucengId;
-    }
-
-    public void setLoucengId(String loucengId) {
-        this.loucengId = loucengId;
-    }
-
-    public String getFangjianId() {
-        return fangjianId;
-    }
-
-    public void setFangjianId(String fangjianId) {
-        this.fangjianId = fangjianId;
-    }
-
     public String getJigou() {
         return jigou;
     }
 
     public void setJigou(String jigou) {
         this.jigou = jigou;
+    }
+
+    public String getJigouId() {
+        return jigouId;
+    }
+
+    public void setJigouId(String jigouId) {
+        this.jigouId = jigouId;
     }
 
     public String getLoudong() {
@@ -85,12 +66,28 @@ public class SaveInfo implements Parcelable {
         this.loudong = loudong;
     }
 
+    public String getLoudongId() {
+        return loudongId;
+    }
+
+    public void setLoudongId(String loudongId) {
+        this.loudongId = loudongId;
+    }
+
     public String getLouceng() {
         return louceng;
     }
 
     public void setLouceng(String louceng) {
         this.louceng = louceng;
+    }
+
+    public String getLoucengId() {
+        return loucengId;
+    }
+
+    public void setLoucengId(String loucengId) {
+        this.loucengId = loucengId;
     }
 
     public String getFangjian() {
@@ -101,16 +98,26 @@ public class SaveInfo implements Parcelable {
         this.fangjian = fangjian;
     }
 
-    public SaveInfo() {
-
+    public String getFangjianId() {
+        return fangjianId;
     }
 
+    public void setFangjianId(String fangjianId) {
+        this.fangjianId = fangjianId;
+    }
+
+    public String getQrCodeData() {
+        return qrCodeData;
+    }
+
+    public void setQrCodeData(String qrCodeData) {
+        this.qrCodeData = qrCodeData;
+    }
 
     @Override
     public int describeContents() {
         return 0;
     }
-
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
@@ -122,19 +129,6 @@ public class SaveInfo implements Parcelable {
         dest.writeString(loucengId);
         dest.writeString(fangjian);
         dest.writeString(fangjianId);
-    }
-
-    @Override
-    public String toString() {
-        return "SaveInfo{" +
-                "jigou='" + jigou + '\'' +
-                ", jigouId='" + jigouId + '\'' +
-                ", loudong='" + loudong + '\'' +
-                ", loudongId='" + loudongId + '\'' +
-                ", louceng='" + louceng + '\'' +
-                ", loucengId='" + loucengId + '\'' +
-                ", fangjian='" + fangjian + '\'' +
-                ", fangjianId='" + fangjianId + '\'' +
-                '}';
+        dest.writeString(qrCodeData);
     }
 }

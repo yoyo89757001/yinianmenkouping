@@ -13,6 +13,15 @@ public class BiudBean implements IPickerViewData {
 
     private String id;
     private String name;
+    private String qrCodeData;
+
+    public String getQrCodeData() {
+        return qrCodeData;
+    }
+
+    public void setQrCodeData(String qrCodeData) {
+        this.qrCodeData = qrCodeData;
+    }
 
     public String getId() {
         return id;
