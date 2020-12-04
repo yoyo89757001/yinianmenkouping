@@ -60,6 +60,15 @@
             android:name="design_height_in_dp"
             android:value="812" />
 
+        <!-- 自动重启 -->
+        <receiver android:name=".ui.BaseActivity$MyReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <!-- <category android:name="android.intent.category.HOME" /> -->
+            </intent-filter>
+        </receiver>
 
     </application>
 
