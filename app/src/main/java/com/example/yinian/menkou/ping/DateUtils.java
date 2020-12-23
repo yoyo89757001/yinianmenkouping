@@ -382,7 +382,7 @@ public class DateUtils {
     }
 
     public static String ti(String time) {
-        SimpleDateFormat sdr = new SimpleDateFormat("HH:mm", Locale.CHINA);
+        SimpleDateFormat sdr = new SimpleDateFormat("HH:mm:ss", Locale.CHINA);
         @SuppressWarnings("unused")
         long lcc = Long.parseLong(time);
 //        int i = Integer.parseInt(time);

@@ -13,6 +13,9 @@ import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -124,6 +127,17 @@ public class InfoActivity extends AppCompatActivity {
         registerReceiver(timeChangeReceiver, intentFilter);
 
 
+        Handler handler=new Handler(Looper.getMainLooper());
+        Runnable runnable=new Runnable() {
+
+            @Override
+            public void run() {
+                handler.postDelayed(this,1000);
+                binding.shijian.setText(DateUtils.ti(System.currentTimeMillis()+""));
+            }
+        };
+        handler.postDelayed(runnable,100);
+
         loginloudong(id);
 
     }
@@ -185,7 +199,7 @@ public class InfoActivity extends AppCompatActivity {
             holder.name.setText(data.getResult().get(0).getElderName()+"");
             holder.jiehu.setText(data.getResult().get(0).getNurseLevelName()+"");
             holder.hulizu.setText("护理组:"+data.getResult().get(0).getNurseGroupName());
-            holder.bianhao.setText(data.getResult().get(0).getId()+"");
+            holder.bianhao.setText(data.getResult().get(0).getBedName()+"");
             holder.zhuzhi.setText("主治医生:"+data.getResult().get(0).getDoctorName());
             String timer=DateUtils.time(data.getResult().get(0).getCheckInTime()+"");
             holder.ruyuanshijian.setText("入院时间:"+DateUtils.time1(data.getResult().get(0).getCheckInTime()+""));
@@ -212,7 +226,7 @@ public class InfoActivity extends AppCompatActivity {
                 holder.name1.setText(data.getResult().get(1).getElderName()+"");
                 holder.jiehu1.setText(data.getResult().get(1).getNurseLevelName()+"");
                 holder.hulizu1.setText("护理组:"+data.getResult().get(1).getNurseGroupName());
-                holder.bianhao1.setText(data.getResult().get(1).getId()+"");
+                holder.bianhao1.setText(data.getResult().get(1).getBedName()+"");
                 holder.zhuzhi1.setText("主治医生:"+data.getResult().get(1).getDoctorName());
                 String timer1=DateUtils.time(data.getResult().get(1).getCheckInTime()+"");
                 holder.ruyuanshijian1.setText("入院时间:"+DateUtils.time1(data.getResult().get(1).getCheckInTime()+""));
@@ -340,13 +354,15 @@ public class InfoActivity extends AppCompatActivity {
                                         bean.setCreateTime(resultDTO.getCreateTime());
                                         bean.setCheckInTime(resultDTO.getCheckInTime());
                                         bean.setNurseLevelName(resultDTO.getNurseLevelName());
-                                        //bean.setElderImage(resultDTO.getElderImage());
-                                        if (i==0){
-                                            bean.setElderImage("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606647944241&di=079f8e332e60013b7509da6a427c3780&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn%2Fw640h914%2F20180211%2Fbb18-fyrkuxt4639327.jpg");
-                                        }
-                                        if (i==1){
-                                            bean.setElderImage("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606647944238&di=901448a231f4b0a00430e1db88110156&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Ftranslate%2Fw391h561%2F20180226%2F6C1P-fyrwsqi2966178.jpg");
-                                        }
+                                        bean.setBedName(resultDTO.getBedName());
+                                        bean.setBedId(resultDTO.getBedId());
+                                        bean.setElderImage(resultDTO.getElderImage());
+//                                        if (i==0){
+//                                            bean.setElderImage("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606647944241&di=079f8e332e60013b7509da6a427c3780&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn%2Fw640h914%2F20180211%2Fbb18-fyrkuxt4639327.jpg");
+//                                        }
+//                                        if (i==1){
+//                                            bean.setElderImage("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606647944238&di=901448a231f4b0a00430e1db88110156&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Ftranslate%2Fw391h561%2F20180226%2F6C1P-fyrwsqi2966178.jpg");
+//                                        }
                                         i++;
                                         bean.setId(resultDTO.getId());
                                         renBeans.add(bean);
